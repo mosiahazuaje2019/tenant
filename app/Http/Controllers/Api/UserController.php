@@ -25,7 +25,6 @@ class UserController extends Controller
             'client_id' => $data['client_id'],
         ]);
 
-        // no devolvemos password
         return response()->json($user->only('id', 'name', 'email', 'client_id'), 201);
     }
 }

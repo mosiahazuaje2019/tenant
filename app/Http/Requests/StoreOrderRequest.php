@@ -7,30 +7,21 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class StoreOrderRequest extends FormRequest
 {
-    /**
-     * Autoriza la solicitud.
-     * Solo permite la creación si el usuario está autenticado.
-     */
     public function authorize(): bool
     {
         return Auth::check();
     }
 
-    /**
-     * Reglas de validación para crear una orden.
-     */
     public function rules(): array
     {
         return [
             'items' => ['required', 'array', 'min:1'],
 
-            // Validación por cada ítem
             'items.*.sku'        => ['required', 'string', 'max:64'],
             'items.*.name'       => ['required', 'string', 'max:255'],
             'items.*.quantity'   => ['required', 'integer', 'min:1'],
             'items.*.unit_price' => ['required', 'numeric', 'min:0'],
 
-            // Campo opcional para el impuesto (ej. 0.19)
             'tax_rate' => ['nullable', 'numeric', 'min:0'],
         ];
     }

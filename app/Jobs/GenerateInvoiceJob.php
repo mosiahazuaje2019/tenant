@@ -16,28 +16,17 @@ class GenerateInvoiceJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    /**
-     * El ID de la orden asociada.
-     */
     public int $orderId;
 
-    /**
-     * Crear una nueva instancia del Job.
-     */
     public function __construct(int $orderId)
     {
         $this->orderId = $orderId;
     }
 
-    /**
-     * Ejecuta el job.
-     */
     public function handle(): void
     {
-        // Buscar la orden con sus relaciones
         $order = Order::with('items', 'client')->findOrFail($this->orderId);
 
-        // Simular la creación de una factura
         $invoice = Invoice::create([
             'order_id' => $order->id,
             'number'   => 'INV-' . Str::upper(Str::ulid()),
@@ -50,11 +39,9 @@ class GenerateInvoiceJob implements ShouldQueue
             ],
         ]);
 
-        // Actualizar el estado de la orden
         $order->update(['status' => 'processing']);
 
-        // Registrar el evento en logs
-        Log::info('✅ Invoice generated successfully', [
+        Log::info('Invoice generated successfully', [
             'order_id'       => $order->id,
             'order_number'   => $order->number,
             'invoice_id'     => $invoice->id,

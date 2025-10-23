@@ -19,7 +19,6 @@ class OrderController extends Controller
 
     /**
      * GET /api/orders
-     * Lista todas las órdenes del cliente autenticado (paginadas).
      */
     public function index(Request $request)
     {
@@ -40,7 +39,6 @@ class OrderController extends Controller
 
     /**
      * POST /api/orders
-     * Crea una orden con ítems para el cliente autenticado.
      */
     public function store(StoreOrderRequest $request)
     {
@@ -54,7 +52,6 @@ class OrderController extends Controller
 
     /**
      * GET /api/orders/{id}
-     * Retorna la orden + items, validando tenant.
      */
     public function show(Request $request, int $id)
     {

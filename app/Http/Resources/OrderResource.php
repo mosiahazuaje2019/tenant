@@ -23,7 +23,6 @@ class OrderResource extends JsonResource
             'created_at'=> $this->created_at,
             'updated_at'=> $this->updated_at,
 
-            // Solo si están cargados:
             'items'     => OrderItemResource::collection($this->whenLoaded('items')),
             'invoice'   => $this->whenLoaded('invoice', function () {
                 return [
