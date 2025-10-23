@@ -70,7 +70,7 @@ docker compose exec app php artisan optimize:clear
 
 ## 6. 🔐 Autenticación (Bearer Token)
 ```bash
-POST /api/auth/token
+POST http://localhost:8000/api/auth/token
 Body JSON
 {
   "email": "admin@system.local",
