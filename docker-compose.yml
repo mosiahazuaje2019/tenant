@@ -1,0 +1,94 @@
+version: "3.9"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: docker/app/Dockerfile
+    container_name: laravel-app
+    env_file:
+      - .env
+    volumes:
+      - ./:/var/www/html
+      - composer-cache:/tmp/composer-cache
+    depends_on:
+      - db
+      - redis
+
+  web:
+    image: nginx:1.25-alpine
+    container_name: laravel-web
+    ports:
+      - "8000:80"
+    volumes:
+      - ./:/var/www/html
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - app
+
+  db:
+    image: mysql:8.0
+    container_name: laravel-db
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE:-tenant}
+      MYSQL_USER: ${DB_USERNAME:-tenant}
+      MYSQL_PASSWORD: ${DB_PASSWORD:-tenant}
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - db-data:/var/lib/mysql
+    ports:
+      - "33060:3306"
+
+  redis:
+    image: redis:7-alpine
+    container_name: laravel-redis
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      - redis-data:/data
+    ports:
+      - "6379:6379"
+
+  queue:
+    build:
+      context: .
+      dockerfile: docker/app/Dockerfile
+    container_name: laravel-queue
+    env_file:
+      - .env
+    volumes:
+      - ./:/var/www/html
+    depends_on:
+      - app
+      - redis
+      - db
+    command: ["php", "artisan", "queue:work", "--sleep=1", "--tries=3", "--verbose"]
+
+  scheduler:
+    build:
+      context: .
+      dockerfile: docker/app/Dockerfile
+    container_name: laravel-scheduler
+    env_file:
+      - .env
+    volumes:
+      - ./:/var/www/html
+    depends_on:
+      - app
+      - db
+      - redis
+    command: ["sh", "-c", "while [ true ]; do php artisan schedule:run --verbose --no-interaction; sleep 60; done"]
+
+  node:
+    image: node:20-alpine
+    container_name: laravel-node
+    working_dir: /var/www/html
+    volumes:
+      - ./:/var/www/html
+    ports:
+      - "5173:5173"
+    command: sh -c "npm install && npm run dev -- --host"
+
+volumes:
+  db-data:
+  redis-data:
+  composer-cache:
