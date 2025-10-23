@@ -26,11 +26,12 @@
 ```bash
 git clone https://github.com/mosiahazuaje2019/tenant.git
 cd tenant
+```
 
 ### 2. Preparar variables de entorno
 ```bash
 cp .env.docker .env
-
+```
 Puedes ajustar el nombre de la base de datos o credenciales si lo deseas:
 DB_DATABASE=tenant
 DB_USERNAME=tenant
@@ -39,7 +40,7 @@ DB_PASSWORD=tenant
 ### 3. Levantar los servicios
 ```bash
 docker compose up -d --build
-
+```  
 Esto iniciará los siguientes contenedores:
 
 | Servicio    | Descripción        | Puerto       |
@@ -58,6 +59,7 @@ docker compose exec app composer install
 docker compose exec app php artisan key:generate --force
 docker compose exec app php artisan migrate --seed
 docker compose exec app php artisan optimize:clear
+```
 
 ## 5. 👤 Usuario de prueba
 | Campo        | Valor                |
@@ -74,12 +76,15 @@ Body JSON
   "email": "admin@system.local",
   "password": "secret123"
 }
+```
 
-Respuesta esperada
+## Respuesta esperada
+```bash
 {
   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
   "type": "Bearer"
 }
+```
 
 ## 7 🔎 Endpoints principales
 | Método   | Ruta                       | Descripción                                         | Auth |
