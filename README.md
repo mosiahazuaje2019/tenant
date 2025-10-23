@@ -119,9 +119,9 @@ POST Nuevas ordenes
 http://localhost:8000/api/orders
 {
   "items": [
-    { "sku": "BX-01", "name": "Caja para pizzas",   "quantity": 2, "unit_price": 20.0 },
-    { "sku": "BX-02", "name": "Bolsas para mercado","quantity": 1, "unit_price": 100.0 },
-    { "sku": "BX-03", "name": "Cinta pegante","quantity": 10, "unit_price": 140.0 }
+    { "sku": "BX-01-M", "name": "Camiseta básica negra",   "quantity": 2, "unit_price": 20.0 },
+    { "sku": "BX-02-L", "name": "Camiseta básica blanca","quantity": 1, "unit_price": 100.0 },
+    { "sku": "BX-03-S", "name": "Camiseta básica verde": 10, "unit_price": 140.0 }
   ],
   "tax_rate": 0.19
 }
