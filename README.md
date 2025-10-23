@@ -76,10 +76,10 @@ Body JSON
   "email": "admin@system.local",
   "password": "secret123"
 }
-## Tipo de autenticacion 
+## 🔑 Tipo de autenticación 
 Bearer Token
 
-## Headers 
+## 🧩 Headers requeridos
 Accept: application/json
 Content-Type: application/json
 ```
