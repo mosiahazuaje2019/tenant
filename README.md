@@ -76,6 +76,12 @@ Body JSON
   "email": "admin@system.local",
   "password": "secret123"
 }
+## Tipo de autenticacion 
+Bearer Token
+
+## Headers 
+Accept: application/json
+Content-Type: application/json
 ```
 
 ## Respuesta esperada
