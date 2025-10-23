@@ -103,3 +103,30 @@ Content-Type: application/json
 | **GET**  | `/api/clients/{id}/orders` | Lista las órdenes asociadas a un cliente específico | ✅    |
 | **POST** | `/api/clients`             | Crea un nuevo cliente                               | ✅    |
 | **POST** | `/api/users`               | Crea un nuevo usuario dentro del tenant actual      | ✅    |
+
+## 8 Body de ejemplos para crear clientes y ordenes
+```bash
+POST Nuevos clientes
+http://localhost:8000/api/clients
+{
+  "name": "Gestimedical S.A.",
+  "email": "contact@gestimedical.local",
+  "phone": "+57-300-555-0199",
+  "password": "secret123"
+}
+
+POST Nuevas ordenes
+http://localhost:8000/api/orders
+{
+  "items": [
+    { "sku": "BX-01", "name": "Caja para pizzas",   "quantity": 2, "unit_price": 20.0 },
+    { "sku": "BX-02", "name": "Bolsas para mercado","quantity": 1, "unit_price": 100.0 },
+    { "sku": "BX-03", "name": "Cinta pegante","quantity": 10, "unit_price": 140.0 }
+  ],
+  "tax_rate": 0.19
+}
+
+GET Listado de clientes
+http://127.0.0.1:8000/api/clients/2/orders
+```
+
