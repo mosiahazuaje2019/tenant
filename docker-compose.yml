@@ -6,8 +6,6 @@ services:
       context: .
       dockerfile: docker/app/Dockerfile
     container_name: laravel-app
-    env_file:
-      - .env
     volumes:
       - ./:/var/www/html
       - composer-cache:/tmp/composer-cache
