@@ -130,3 +130,7 @@ GET Listado de clientes
 http://127.0.0.1:8000/api/clients/2/orders
 ```
 
+## 9 Correr los test
+```bash
+php artisan test
+```
