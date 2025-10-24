@@ -102,7 +102,6 @@ Content-Type: application/json
 | **GET**  | `/api/orders/{id}`         | Muestra los detalles de una orden específica        | ✅    |
 | **GET**  | `/api/clients/{id}/orders` | Lista las órdenes asociadas a un cliente específico | ✅    |
 | **POST** | `/api/clients`             | Crea un nuevo cliente                               | ✅    |
-| **POST** | `/api/users`               | Crea un nuevo usuario dentro del tenant actual      | ✅    |
 
 ## 8 Body de ejemplos para crear clientes y ordenes
 ```bash
